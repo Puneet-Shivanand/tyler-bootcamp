@@ -30,6 +30,17 @@
         friends: ["gandhi", "hitler", "elizabeth"]
       }
     }
+
+    handleAddFriend(){
+
+    }
+
+    handleRemoveFriend(name){
+      this.setState((currentState) => {
+        friends: this.currentState.friends.filter((friend) => friend !== name)
+      })
+    }
+
     render(){
     const pronoun = "World"
       return (
