@@ -21,3 +21,6 @@ just javascript
 
 shared mutable states
     views share the same state component 
+
+component
+    A function or class which optionally accepts input and returns a react element.
