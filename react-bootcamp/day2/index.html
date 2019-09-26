@@ -24,13 +24,18 @@
   }
 
   class App extends React.Component {
+    constructor(props){
+      super(props)
+      this.state={
+        friends: ["gandhi", "hitler", "elizabeth"]
+      }
+    }
     render(){
     const pronoun = "World"
-    const friends = ["gandhi", "hitler", "elizabeth"]
       return (
         <div>
           Hello {pronoun}
-          <FriendsList list={friends}/>
+          <FriendsList list={this.state.friends}/>
         </div>
       )
     }
