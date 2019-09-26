@@ -22,8 +22,9 @@
           </ul>
       )
   }
-    
-  function App () {
+
+  class App extends React.Component {
+    render(){
     const pronoun = "World"
     const friends = ["gandhi", "hitler", "elizabeth"]
       return (
@@ -33,6 +34,7 @@
         </div>
       )
     }
+  }
 
   ReactDOM.render(
       <App />,
