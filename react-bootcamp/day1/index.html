@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>
+        Some title
+    </title>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    </head> 
+    <body>
+        <div id='app'></div>
+        <!-- Hello there -->
+        <script type="text/babel">
+        const name = "Puneet";
+        const handle = "@Puneet_Sht_Hpns";
+
+        function NameComponent(props){
+            return <h1> {props.name} </h1>
+            }
+
+        // const nameElement = React.createElement(
+        //     'h1', null,
+        //     name
+        // )
+        
+        function HandleComponent(props){
+            return <h3>{props.handle}</h3>
+        }
+ 
+        function FoobarComponent(){
+            return React.createElement(
+            'p',
+            null,
+            "Foobar"
+            )
+        }
+
+        function App(){
+            return(
+                <div id="container">
+                <NameComponent name={name} />
+                <HandleComponent handle={handle} />
+                <FoobarComponent/>
+                </div>
+            )
+
+        }
+        // const wrapperElement = React.createElement(
+        //     'div',
+        //     { id:'container '},
+        //     //Both method works
+        // //    NameComponent({name:"Puneet"}),
+        //    React.createElement( NameComponent, {name:"Puneet"}),
+        //    React.createElement( HandleComponent, {handle:"@Puneet_Sht_Hpns"} )
+        // )
+        
+        //Exercises
+
+        ReactDOM.render(
+        <App/>, 
+        document.getElementById('app')
+        )
+        </script>
+    </body>
+</html>
