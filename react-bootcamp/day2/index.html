@@ -32,8 +32,12 @@
       }
     }
 
-    handleAddFriend(){
-
+    handleAddFriend(name){
+      this.setState((currentState) => {
+          return {
+            friends:this.currentState.friends.push(name)]
+          }
+      })
     }
 
     handleRemoveFriend(name){
