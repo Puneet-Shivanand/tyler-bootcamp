@@ -28,9 +28,11 @@
     constructor(props){
       super(props)
       this.state={
-        friends: ["gandhi", "hitler", "elizabeth"]
+        friends: ["gandhi", "hitler", "elizabeth"],
+        input:''
       }
     this.handleRemoveFriend = this.handleRemoveFriend.bind(this);
+    this.updateInput = this.updateInput.bind(this);
     }
 
     handleAddFriend(name){
@@ -48,19 +50,27 @@
         }
       }) 
     }
-
+    updateInput(e){
+        const value=e.target.value;
+        this.setState({
+           input:value
+        })
+    }
     render(){
     const pronoun = "World"
       return (
         <div>
           Hello {pronoun}
+          <br/>
+          <br/>
+          <input type="text" placeholder="New Friend" value={this.state.input} onChange={this.updateInput}/>
+          <button onClick={() => props.onAddFriend(name)}>Add</button>
+
           <FriendsList 
           list={this.state.friends}
           onRemoveFriend={this.handleRemoveFriend}
           onAddFriend={this.handleAddFriend}
           /> 
-          <input />
-          <button onClick={() => props.onAddFriend(name)}>Add</button>
         </div>
       )
     }
