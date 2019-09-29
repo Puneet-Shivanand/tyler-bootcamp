@@ -38,8 +38,10 @@
 
     handleRemoveFriend(name){
       this.setState((currentState) => {
+        return {
         friends: this.currentState.friends.filter((friend) => friend !== name)
-      })
+       }
+      }) 
     }
 
     render(){
