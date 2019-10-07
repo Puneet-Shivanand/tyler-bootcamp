@@ -26,6 +26,8 @@
 
   function ActiveFriendsList(props) {
       return (
+        <div>
+          <h3>Active Friends:</h3>
           <ul>
           {props.list.map((name) => 
           (
@@ -36,20 +38,24 @@
             </li>
           ))}
           </ul>
+        </div>
       )
   }
 
   function InactiveFriendsList(props) {
       return (
+        <div>
+          <h3>Inactive Friends:</h3>
           <ul>
           {props.list.map((name) => 
           (
             <li key={name}>
               <span>{name}</span>
-              <button onClick={() => props.onRemoveFriend(name)}>Activate</button>
+              <button onClick={() => props.onActivateFriend(name)}>Activate</button>
             </li>
           ))}
           </ul>
+        </div>
       )
   }
 
@@ -70,7 +76,13 @@
     }
     
     handleActivate(name){
-
+      this.setState((currentState) => {
+        console.log(currentState.InActiveFriends)
+          return {
+            InActiveFriends: currentState.InActiveFriends.filter((friend) => friend !== name),
+            ActiveFriends: currentState.ActiveFriends.concat([name])
+          }
+      })
     }
 
     handleDeactivate(name){
@@ -115,13 +127,13 @@
           /> 
 
           <ActiveFriendsList 
-          list={this.state.friends}
+          list={this.state.ActiveFriends}
           onRemoveFriend={this.handleRemoveFriend}
           onDeactivateFriend={this.handleDeactivate}
           /> 
 
           <InactiveFriendsList 
-          list={this.state.friends}
+          list={this.state.InActiveFriends}
           onActivateFriend={this.handleActivate}
           /> 
         </div>
