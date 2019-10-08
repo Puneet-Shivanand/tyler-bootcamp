@@ -10,19 +10,6 @@
   <div id='app'></div>
 
   <script type='text/babel'>
-  function FriendsList(props) {
-      return (
-          <ul>
-          {props.list.map((name) => 
-          (
-            <li key={name}>
-              <span>{name}</span>
-              <button onClick={() => props.onRemoveFriend(name)}>Remove</button>
-            </li>
-          ))}
-          </ul>
-      )
-  }
 
   function ActiveFriendsList(props) {
       return (
@@ -105,7 +92,7 @@
     handleAddFriend(){
       this.setState((currentState) => {
           return {
-            friends:currentState.friends.concat([this.state.input]),
+            ActiveFriends: currentState.ActiveFriends.concat([this.state.input]),
             input:''
           }
       })
@@ -133,11 +120,6 @@
           <br/>
           <input type="text" placeholder="New Friend" value={this.state.input} onChange={this.updateInput}/>
           <button onClick={this.handleAddFriend}>Add</button>
-
-          <FriendsList 
-          list={this.state.friends}
-          onRemoveFriend={this.handleRemoveFriend}
-          /> 
 
           <ActiveFriendsList 
           list={this.state.ActiveFriends}
