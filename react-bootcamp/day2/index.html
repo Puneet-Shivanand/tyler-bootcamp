@@ -61,6 +61,7 @@
     this.handleActivate = this.handleActivate.bind(this);
     this.handleDeactivate = this.handleDeactivate.bind(this);
     this.handleRemoveActiveFriend = this.handleRemoveActiveFriend.bind(this);
+    this.handleClear = this.handleClear.bind(this)
     }
     
     handleActivate(name){
@@ -111,11 +112,23 @@
            input:value
         })
     }
+
+    handleClear(){
+      this.setState((currentState) => {
+          return {
+            ActiveFriends: currentState.ActiveFriends = [] ,
+            InActiveFriends: currentState.InActiveFriends = [] ,
+            input:''
+          }
+      })
+    }
     render(){
     const pronoun = "World"
       return (
         <div>
           Hello {pronoun}
+          <br/>
+          <button onClick={this.handleClear}>Clear All</button>
           <br/>
           <br/>
           <input type="text" placeholder="New Friend" value={this.state.input} onChange={this.updateInput}/>
