@@ -65,6 +65,10 @@
         this.updateInput = this.updateInput.bind(this)
         this.handleAddFriend = this.handleAddFriend.bind(this)
         this.handleToggleFriend = this.handleToggleFriend.bind(this)
+        console.log("--constructor--")
+      }
+      componentDidMount(){
+        console.log("--componentDidMount")
       }
       handleAddFriend() {
         this.setState((currentState) => {
@@ -103,6 +107,7 @@
         })
       }
       render() {
+        console.log("--render--")
         return (
           <div>
             <input
