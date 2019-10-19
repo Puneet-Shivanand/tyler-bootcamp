@@ -9,6 +9,30 @@
 <body>
   <div id='app'></div>
 
+  <script>
+    window.API = {
+      fetchFriends(){
+        return new Promise((res,rej)=>{
+          const friends = [
+            {
+              name: 'Jordyn',
+              active: true,
+            },
+            {
+              name: 'Mikenzi',
+              active: true,
+            },
+            {
+              name: 'Jake',
+              active: false
+            }
+          ]
+          setTimeout(()=>res(friends),2000)
+        })
+      }
+    }
+  </script>
+
   <script type='text/babel'>
     function ActiveFriends (props) {
       return (
@@ -45,20 +69,7 @@
       constructor(props) {
         super(props)
         this.state = {
-          friends: [
-            {
-              name: 'Jordyn',
-              active: true,
-            },
-            {
-              name: 'Mikenzi',
-              active: true,
-            },
-            {
-              name: 'Jake',
-              active: false
-            }
-          ],
+          friends:[],
           input: '',
         }
         this.handleRemoveFriend = this.handleRemoveFriend.bind(this)
@@ -67,8 +78,16 @@
         this.handleToggleFriend = this.handleToggleFriend.bind(this)
         console.log("--constructor--")
       }
+      //Lifecycle Methods
       componentDidMount(){
         console.log("--componentDidMount")
+        API.fetchFriends()
+        .then((friends) => {
+          console.log('FRIENDS==>',friends)
+          this.setState({
+            friends
+          })
+        })
       }
       componentDidUpdate(){
         console.log("--componentDidUpdate--")
@@ -76,9 +95,9 @@
       componentWillUnmount(){
         console.log("--componentWillUnmount--")
       }
-      static getDerivedStateFromProps(){
-        // Not Covered in the course, new addition React16.3
-      }
+      // static getDerivedStateFromProps(){
+      //   // Not Covered in the course, new addition React16.3
+      // }
       handleAddFriend() {
         this.setState((currentState) => {
           return {
