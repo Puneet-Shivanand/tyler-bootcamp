@@ -70,6 +70,15 @@
       componentDidMount(){
         console.log("--componentDidMount")
       }
+      componentDidUpdate(){
+        console.log("--componentDidUpdate--")
+      }
+      componentWillUnmount(){
+        console.log("--componentWillUnmount--")
+      }
+      static getDerivedStateFromProps(){
+        // Not Covered in the course, new addition React16.3
+      }
       handleAddFriend() {
         this.setState((currentState) => {
           return {
