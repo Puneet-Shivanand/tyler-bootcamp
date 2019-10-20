@@ -13,7 +13,6 @@
       fetchPopularRepos(language) {
         // "language" can be "javascript", "ruby", "python", or "all"
         const encodedURI = encodeURI(`https://api.github.com/search/repositories?q=stars:>1+language:${language}&sort=stars&order=desc&type=Repositories`)
-
         return fetch(encodedURI)
           .then((data) => data.json())
           .then((repos) => repos.items)
@@ -56,14 +55,36 @@
     }
 
     class App extends React.Component {
-      render() {
-        return (
-          <div>
-            
-          </div>
-        )
-      }
-    }
+        constructor(props){
+            super(props)
+            this.state = {
+                loading:true,
+                repos:[],
+                lang:"all"
+            }
+        }
+        componentDidMount(){
+            console.log("--componentDidMount")
+            API.fetchPopularRepos()
+            .then((repos) => {
+            this.setState({
+                repos:repos.items,
+                loading:false
+                })
+                console.log(repos)
+            })
+        }
+        render() {
+        if(this.state.loading === true){
+          return <Loading />
+          }
+            return (
+            <div>
+            {this.state.repos}
+            </div>
+            )
+        }
+        }
 
     ReactDOM.render(
       <App />,
