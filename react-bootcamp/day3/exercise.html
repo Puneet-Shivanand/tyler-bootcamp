@@ -78,35 +78,50 @@
                 activeLanguage:'all'
             }
             this.handleSelectLanguage = this.handleSelectLanguage.bind(this)
+            this.fetchRepos = this.fetchRepos.bind(this)
         }
+        componentDidMount(){
+            this.fetchRepos(this.state.activeLanguage)
+        }
+
+        fetchRepos(lang){
+          this.setState({
+            loading:true
+          })
+          API.fetchPopularRepos(lang)
+            .then((repos) => {
+            this.setState({
+                repos,
+                loading:false
+                })
+              console.log(repos)
+            })
+        }
+
         handleSelectLanguage(lang){
           this.setState({
             activeLanguage:lang
           })
         }
-        // componentDidMount(){
-        //     console.log("--componentDidMount")
-        //     API.fetchPopularRepos()
-        //     .then((repos) => {
-        //     this.setState({
-        //         repos:repos.items,
-        //         loading:false
-        //         })
-        //         console.log(repos)
-        //     })
-        // }
         render() {
-        // if(this.state.loading === true){
-        //   return <Loading />
-        //   }
-            return (
+          return (
             <div>
              <Nav onSelectLanguage={this.handleSelectLanguage} />
-             <h2>Active Language:{this.state.activeLanguage} </h2>
+            
+             {
+              this.state.loading === true 
+            ? <Loading/>
+            :
+            <div>
+              <h2 style={{textAlign:'center'}}>Active Language:{this.state.activeLanguage} </h2> 
+              {JSON.stringify(this.state.repos)}
+            </div>
+             }
+
             </div>
             )
-        }
-        }
+         }
+      }
 
     ReactDOM.render(
       <App />,
