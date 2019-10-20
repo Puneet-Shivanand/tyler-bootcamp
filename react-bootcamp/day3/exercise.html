@@ -54,33 +54,55 @@
       }
     }
 
+    function Nav(props){
+      const languages = ['all','javascript','ruby','python']
+      return(
+      <nav>
+        <ul>
+          {languages.map((lang) => (
+            <li key={lang} onClick={() => props.onSelectLanguage(lang)}>
+              {lang}
+            </li>
+          ))}
+        </ul>
+      </nav>
+      )
+    }
+
     class App extends React.Component {
         constructor(props){
             super(props)
             this.state = {
                 loading:true,
                 repos:[],
-                lang:"all"
+                activeLanguage:'all'
             }
+            this.handleSelectLanguage = this.handleSelectLanguage.bind(this)
         }
-        componentDidMount(){
-            console.log("--componentDidMount")
-            API.fetchPopularRepos()
-            .then((repos) => {
-            this.setState({
-                repos:repos.items,
-                loading:false
-                })
-                console.log(repos)
-            })
+        handleSelectLanguage(lang){
+          this.setState({
+            activeLanguage:lang
+          })
         }
+        // componentDidMount(){
+        //     console.log("--componentDidMount")
+        //     API.fetchPopularRepos()
+        //     .then((repos) => {
+        //     this.setState({
+        //         repos:repos.items,
+        //         loading:false
+        //         })
+        //         console.log(repos)
+        //     })
+        // }
         render() {
-        if(this.state.loading === true){
-          return <Loading />
-          }
+        // if(this.state.loading === true){
+        //   return <Loading />
+        //   }
             return (
             <div>
-            {this.state.repos}
+             <Nav onSelectLanguage={this.handleSelectLanguage} />
+             <h2>Active Language:{this.state.activeLanguage} </h2>
             </div>
             )
         }
