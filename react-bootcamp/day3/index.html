@@ -58,8 +58,12 @@
         window.clearInterval(this.interval)
       }
       render(){
-        // return <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
-        return <p>{this.state.text}</p>
+        return (
+        <div>
+          <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+          <p>{this.state.text}</p>
+        </div>
+        )
       }
     }
     
