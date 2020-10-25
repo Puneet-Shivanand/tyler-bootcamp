@@ -62,11 +62,11 @@
       return(
         <nav>
           <ul>
-            {languages.map((lang)=>{
-              <li key={lang} onClick={()=>{}}>
-              {lang}
+            {languages.map((lang)=>(
+              <li key={lang} onClick={()=>props.onSelectLanguage(lang)}>
+               {lang}
               </li>
-            })}
+            ))}
           </ul>
         </nav>
       )
@@ -81,14 +81,17 @@
             activeLanguage:"all",
             loading:true
           }
+         this.handleSelectLanguage = this.handleSelectLanguage.bind(this)
          }
-      handleSelectLanguage(){
-          
+      handleSelectLanguage(lang){
+        this.setState({activeLanguage: lang})
       }
       render() {
         return (
           <div>
-           <Nav/>
+           <Nav onSelectLanguage={this.handleSelectLanguage}/>
+           <h1>Active Language : {this.state.activeLanguage}</h1>
+            
           </div>
         )
       }
