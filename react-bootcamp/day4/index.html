@@ -101,8 +101,19 @@
       componentDidMount(){
         this.fetchRepos(this.state.activeLanguage)
       }
+      componentDidUpdate(prevProps, prevState){
+        if(prevState.activeLanguage !== this.state.activeLanguage)
+        {
+          this.fetchRepos(this.state.activeLanguage)
+        }
+      }  
+
       fetchRepos(lang){
-        this.setState({loading:true})
+        this.setState({
+          loading:true
+          })
+
+          
         window.API.fetchPopularRepos(lang)
         .then((repos)=>{
           this.setState({
@@ -110,9 +121,8 @@
             repos
           })
         })
-
-        
       }
+
       handleSelectLanguage(lang){
         this.setState({activeLanguage: lang})
       }
@@ -121,7 +131,7 @@
           <div>
            <Nav onSelectLanguage={this.handleSelectLanguage}/>
            <h1>Active Language : {this.state.activeLanguage}</h1>
-            {this.state.Loading === true?<Loading/>:
+            { this.state.loading === true ? <Loading/> :
             <div>
               <h1 style = {{textAlign:'center'}}>{this.state.activeLanguage}</h1>
               <RepoGrid repos={this.state.repos} />
